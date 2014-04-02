@@ -4,28 +4,27 @@
 //main.cpp
 
 #include "std_lib_facilities_4.h"
-#include "Graph.h"
-#include "Simple_window.h"
 #include "FlipFlap.h"
 
-int current_screen = FlipFlap::SPLASH_SCREEN;
-FlipFlap engine;
+FlipFlap engine;      //create the game engine
 
 int main()
   try{
-    switch(current_screen){
-      case FlipFlap::SPLASH_SCREEN:
-        engine.show_splash();
-        break;
-      case FlipFlap::LEVELS_SCREEN:
-        engine.show_levels();
-        break;
-      case FlipFlap::GAME_SCREEN:
-        engine.show_game();
-        break;
-      case FlipFlap::SCORES_SCREEN:
-        engine.show_scores();
-        break
+    while(engine.running()){            //infinite loop
+      switch(engine.current_screen()){  //check game state
+        case FlipFlap::SPLASH_SCREEN:
+          engine.show_splash();         //show_x() functions actually do things
+          break;
+        case FlipFlap::LEVELS_SCREEN:
+          engine.show_levels();
+          break;
+        case FlipFlap::GAME_SCREEN:
+          engine.show_game();
+          break;
+        case FlipFlap::SCORES_SCREEN:
+          engine.show_scores();
+          break;
+      }
     }
   }
   catch(exception& e){
