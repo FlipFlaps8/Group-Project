@@ -3,6 +3,7 @@
 //FlipFlap.cpp
 
 #include "FlipFlap.h"
+//add whatever includes you need to make your show function work
 
 bool FlipFlap::is_running(){
   return running;
