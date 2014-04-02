@@ -2,5 +2,5 @@
 //CSCE 121-501
 //Game.h
 
-void setup();
+void setup(int level);
 void update();
