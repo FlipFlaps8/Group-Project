@@ -4,7 +4,7 @@
 
 struct FlipFlap(){
   
-  //enum{SPLASH_SCREEN, LEVELS_SCREEN, GAME_SCREEN, SCORES_SCREEN};  <- these go in the .cpp, not the .h
+  enum{SPLASH_SCREEN, LEVELS_SCREEN, GAME_SCREEN, SCORES_SCREEN};
   
   bool is_running();
   int current_screen();
@@ -13,4 +13,8 @@ struct FlipFlap(){
   void show_levels();
   void show_game();
   void show_scores();
+  
+  private:
+  bool running;
+  int screen;
 };
