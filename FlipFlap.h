@@ -2,7 +2,7 @@
 //CSCE 121-501
 //FlipFlap.h
 
-struct FlipFlap(){
+struct FlipFlap{
   
   const int X_MAX = 599;
   const int Y_MAX = 399;
