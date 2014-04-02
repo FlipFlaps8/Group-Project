@@ -6,29 +6,25 @@
 #include "std_lib_facilities_4.h"
 #include "Graph.h"
 #include "Simple_window.h"
-#include "Show.h"
+#include "FlipFlap.h"
 
-const int SPLASH_SCREEN = 0;
-const int LEVELS_SCREEN = 1;
-const int GAME_SCREEN = 2;
-const int SCORES_SCREEN = 3;
-
-int current_screen = SPLASH_SCREEN;
+int current_screen = FlipFlap::SPLASH_SCREEN;
+FlipFlap engine;
 
 int main()
   try{
     switch(current_screen){
-      case SPLASH_SCREEN:
-        show_splash();
+      case FlipFlap::SPLASH_SCREEN:
+        engine.show_splash();
         break;
-      case LEVELS_SCREEN:
-        show_levels();
+      case FlipFlap::LEVELS_SCREEN:
+        engine.show_levels();
         break;
-      case GAME_SCREEN:
-        show_game();
+      case FlipFlap::GAME_SCREEN:
+        engine.show_game();
         break;
-      case SCORES_SCREEN:
-        show_scores();
+      case FlipFlap::SCORES_SCREEN:
+        engine.show_scores();
         break
     }
   }
