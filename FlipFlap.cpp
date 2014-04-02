@@ -10,7 +10,7 @@ bool FlipFlap::is_running(){
   return running;
 }
 
-int current_screen(){
+int FlipFlap::current_screen(){
   return screen;
 }
 
