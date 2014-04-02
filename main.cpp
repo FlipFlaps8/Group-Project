@@ -3,7 +3,6 @@
 //Due April 28, 2014
 //main.cpp
 
-#include "std_lib_facilities_4.h"
 #include "FlipFlap.h"
 
 FlipFlap engine;      //create the game engine
