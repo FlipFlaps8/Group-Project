@@ -4,6 +4,12 @@
 
 struct FlipFlap(){
   
+  const int X_MAX = 599;
+  const int Y_MAX = 399;
+  const int X_CENTER = 299;
+  const int Y_CENTER = 199;
+  const int TABLE_TOP = 299;
+  
   enum{SPLASH_SCREEN, LEVELS_SCREEN, GAME_SCREEN, SCORES_SCREEN};
   
   bool is_running();
