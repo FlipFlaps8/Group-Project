@@ -13,7 +13,7 @@ struct FlipFlap{
   static const int X_CENTER = 299;
   static const int Y_CENTER = 199;
   static const int TABLE_TOP = 299;
-  static Simple_window win(Point(100,100),600,400,"FlipFlap");
+  static Simple_window win(Point(100,100),600,400,"FlipFlap"); //Game window
   
   enum{SPLASH_SCREEN, LEVELS_SCREEN, GAME_SCREEN, SCORES_SCREEN};
   
