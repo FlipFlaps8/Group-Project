@@ -5,5 +5,5 @@
 #include "Graph.h"
 
 struct Pancake : Rectangle {
-  Pancake(int size);
+  Pancake(int size, int position);
 }
