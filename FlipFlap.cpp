@@ -16,6 +16,10 @@ int FlipFlap::current_screen(){
   return screen;
 }
 
+void FlipFlap::done(){
+  running = false;
+}
+
 void FlipFlap::show_splash(){
 
 }
