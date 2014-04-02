@@ -7,11 +7,11 @@
 
 struct FlipFlap{
   
-  const int X_MAX = 599;
-  const int Y_MAX = 399;
-  const int X_CENTER = 299;
-  const int Y_CENTER = 199;
-  const int TABLE_TOP = 299;
+  static const int X_MAX = 599;
+  static const int Y_MAX = 399;
+  static const int X_CENTER = 299;
+  static const int Y_CENTER = 199;
+  static const int TABLE_TOP = 299;
   
   enum{SPLASH_SCREEN, LEVELS_SCREEN, GAME_SCREEN, SCORES_SCREEN};
   
