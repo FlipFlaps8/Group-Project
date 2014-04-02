@@ -3,7 +3,6 @@
 //FlipFlap.h
 
 #include "std_lib_facilities_4.h"
-#include "game.h"
 
 struct FlipFlap{
   
