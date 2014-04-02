@@ -3,6 +3,8 @@
 //FlipFlap.h
 
 #include "std_lib_facilities_4.h"
+#include "Simple_window.h"
+#include "Graph.h"
 
 struct FlipFlap{
   
@@ -11,6 +13,7 @@ struct FlipFlap{
   static const int X_CENTER = 299;
   static const int Y_CENTER = 199;
   static const int TABLE_TOP = 299;
+  static Simple_window win(Point(100,100),600,400,"FlipFlap");
   
   enum{SPLASH_SCREEN, LEVELS_SCREEN, GAME_SCREEN, SCORES_SCREEN};
   
