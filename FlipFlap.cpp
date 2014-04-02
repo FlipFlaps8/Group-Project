@@ -3,8 +3,10 @@
 //FlipFlap.cpp
 
 #include "FlipFlap.h"
-#include "game.h"
+#include "Game.h"
 //add whatever includes you need to make your show function work
+
+FlipFlap::FlipFlap() : running(true), screen(FlipFlap::SPLASH_SCREEN){}
 
 bool FlipFlap::is_running(){
   return running;
