@@ -2,6 +2,9 @@
 //CSCE 121-501
 //FlipFlap.h
 
+#include "std_lib_facilities_4.h"
+#include "Game.h"
+
 struct FlipFlap{
   
   const int X_MAX = 599;
