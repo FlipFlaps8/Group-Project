@@ -3,6 +3,9 @@
 //Pancake.h
 
 #include "Graph.h"
+#include "FlipFlap.h"
+
+using namespace Graph_lib;
 
 struct Pancake : Rectangle {
   Pancake(int size, int position);
