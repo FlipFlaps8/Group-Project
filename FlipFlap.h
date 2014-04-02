@@ -16,6 +16,7 @@ struct FlipFlap{
   
   bool is_running();
   int current_screen();
+  void done();
   
   void show_splash();
   void show_levels();
