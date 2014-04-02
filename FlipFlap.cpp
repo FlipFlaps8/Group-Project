@@ -3,8 +3,7 @@
 //FlipFlap.cpp
 
 #include "FlipFlap.h"
-#include "Game.h"
-//add whatever includes you need to make your show function work
+//add whatever includes you need to make your show function work to FlipFlap.h
 
 bool FlipFlap::is_running(){
   return running;
