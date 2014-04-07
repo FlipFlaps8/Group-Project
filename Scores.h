@@ -9,17 +9,15 @@ void write_top5(Player& score){
   oscore_file.open("HighScore.txt");
   oscore_file<<scorel;
   oscore_file.close;
-  
 }
 struct Player { //contains player name and score
   string name;
   int score;
 }
-
-Player scores[5];
-
-void get_top5(){
+const int MAX_SCORES=5;
+Player scores[MAX_SCORES];
+/*void get_top5(){
   ifstream iscore_file("HighScore.txt")
   iscore_file>>
   
-}
+}*/
