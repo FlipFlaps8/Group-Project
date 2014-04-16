@@ -29,7 +29,6 @@ struct FlipFlap{
   void done();
 
   void setup(int l);
-  void update();
 
   void show_splash();
   void show_levels();
