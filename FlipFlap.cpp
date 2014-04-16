@@ -3,7 +3,6 @@
 //FlipFlap.cpp
 
 #include "FlipFlap.h"
-#include "Pancake.h"
 //add whatever includes you need to make your show function work
 
 bool FlipFlap::is_running(){
@@ -28,8 +27,8 @@ vector<int> pancake_stack(int l){
 
 void FlipFlap::setup(int level){
   //draw pancakes
-  vector<int> game_stack = pancake_stack(level);
-  vector<Pancake*> game_stack_p(game_stack.size());
+  game_stack = pancake_stack(level);
+  game_stack_p.resize(game_stack.size());
   for(int i = 0; i < game_stack.size(); ++i){
     game_stack_p[i] = new Pancake(game_stack[i],i);
   }
