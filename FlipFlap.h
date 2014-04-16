@@ -38,5 +38,7 @@ struct FlipFlap{
   private:
   bool running;
   int screen;
+  vector<int> game_stack;
+  vector<Pancake*> game_stack_p;
 };
 #endif
