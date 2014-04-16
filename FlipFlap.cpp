@@ -36,12 +36,9 @@ void FlipFlap::setup(int level){
   for(Pancake* pancake : game_stack_p){
     win.attach(*pancake);
   }
-  win.wait_for_button();
+  win.wait_for_button(); //take this out for GUI control
   //draw buttons
   //display score
-}
-
-void FlipFlap::update(){
 }
 
 void FlipFlap::show_splash(){
