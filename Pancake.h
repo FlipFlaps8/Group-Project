@@ -2,13 +2,14 @@
 //CSCE 121-501
 //Pancake.h
 
-#include "Graph.h"
-#include "FlipFlap.h"
+#ifndef FLIPFLAP_GUARD
+#define FLIPFLAP_GUARD
 
-using namespace Graph_lib;
+#include "FlipFlap.h"
 
 struct Pancake : Rectangle {
   Pancake(int size, int position);
   int s;
   int p;
 };
+#endif
