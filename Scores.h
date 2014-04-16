@@ -1,23 +1,27 @@
-//Group 8
-//CSCE 121-501
-//Scores.h
 
-void find_solution();
+#include "std_lib_facilities_4.h"
+using namespace std;
 
-void write_top5(Player& score){
-  ofstream oscore_file;
-  oscore_file.open("HighScore.txt");
-  oscore_file<<scorel;
-  oscore_file.close;
-}
 struct Player { //contains player name and score
   string name;
   int score;
+};
+
+class Scores
+{
+public:
+
+	Scores();
+	
+	void read_highscores();
+	
+	void write_highscores();
+	
+	void game_score(string initials, int score);
+	
+	vector<Player> get_highscores();
+	
+private:
+	
+	vector<Player> scores;
 }
-const int MAX_SCORES=5;
-Player scores[MAX_SCORES];
-/*void get_top5(){
-  ifstream iscore_file("HighScore.txt")
-  iscore_file>>
-  
-}*/
