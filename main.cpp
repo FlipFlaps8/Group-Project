@@ -9,6 +9,7 @@ FlipFlap engine;      //create the game engine
 
 int main()
   try{
+    srand(time(0));
     while(engine.is_running()){            //infinite loop
       switch(engine.current_screen()){  //check game state
         case FlipFlap::SPLASH_SCREEN:
