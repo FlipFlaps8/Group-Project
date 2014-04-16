@@ -43,6 +43,6 @@ void Score::game_score(string initials, int score){
 	p.score=score;
 	scores[count]=p;
 }
-vector<Player> get_highscore(){
+vector<Player> Scores::get_highscore(){
 	return scores;
 }
