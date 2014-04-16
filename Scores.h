@@ -1,4 +1,3 @@
-
 #include "std_lib_facilities_4.h"
 using namespace std;
 
@@ -24,4 +23,4 @@ public:
 private:
 	
 	vector<Player> scores;
-}
+};
