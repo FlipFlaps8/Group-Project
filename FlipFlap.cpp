@@ -18,11 +18,13 @@ void FlipFlap::done(){
   running = false;
 }
 
+int myrandom (int i) { return rand()%i;}
+srand ( unsigned ( time(0) ) );
 vector<int> pancake_stack(int l){
   vector<int> pancakes(l);
   for(int i =0; i < l; ++i)
     pancakes[i] = i;
-  random_shuffle(pancakes.begin(), pancakes.end());
+  random_shuffle(pancakes.begin(), pancakes.end(), myrandom);
   return pancakes;
 }
 
