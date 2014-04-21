@@ -11,7 +11,7 @@ int width1(int s1){
 }
 
 Point pPoint(int s, int p){
-        return Point(FlipFlap::X_CENTER - width1(s)/2, FlipFlap::TABLE_TOP - height * p);
+        return Point(X_CENTER - width1(s)/2, TABLE_TOP - height * p);
 }
 
 Pancake::Pancake(int size, int position) : Rectangle(pPoint(size,position),width1(size),20), s(size), p(position){}
