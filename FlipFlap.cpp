@@ -27,7 +27,7 @@ vector<int> pancake_stack(int l){
 
 void button_list(int i){
   vector<In_Box> buttons(i);
-  for (int k = 0; k < i; ++k)
+  for (int k =  1; k <= i; ++k)
   {
     stringstream s;
     s<<(k);
