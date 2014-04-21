@@ -26,6 +26,7 @@ int main()
           break;
       }
     }
+    return gui_main();
   }
   catch(exception& e){
     cerr<<"Error: "<<e.what()<<'\n';
