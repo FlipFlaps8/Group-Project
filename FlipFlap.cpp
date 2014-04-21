@@ -50,6 +50,18 @@ void FlipFlap::setup(int level){
   //display score
 }
 
+void FlipFlap::cb_flip(Address button, Address window){
+        auto button_label reference_to<Fl_Button>(button).label();
+        stringstream s(button_label);
+        int pancake = 0;
+        s>>pancake;
+        flip(pancake);
+}
+
+void FlipFlap::flip(int p){
+
+}
+
 void FlipFlap::show_splash(){
 
 }
