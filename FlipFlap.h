@@ -31,6 +31,7 @@ struct FlipFlap{
   void show_levels();
   void show_game();
   void show_scores();
+  void button_list(int i);
 
   private:
   bool running;
