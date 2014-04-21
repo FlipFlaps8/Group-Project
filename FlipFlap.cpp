@@ -26,12 +26,12 @@ vector<int> pancake_stack(int l){
 }
 
 void button_list(int i){
-  vector<In_Box> buttons(i);
+  vector<Button> buttons(i);
   for (int k =  1; k <= i; ++k)
   {
     stringstream s;
     s<<(k);
-    buttons[k] = In_box(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,s.str(),FlipFlap::cb_flip)
+    buttons[k] = Button(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,s.str(),FlipFlap::cb_flip)
     win.attach(buttons[k]);
   }
 }
