@@ -26,6 +26,9 @@ struct FlipFlap{
   void done();
 
   void setup(int l);
+  void cb_flip(Address button, Address window);
+  void flip(int p);
+
 
   void show_splash();
   void show_levels();
