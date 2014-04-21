@@ -25,6 +25,17 @@ vector<int> pancake_stack(int l){
   return pancakes;
 }
 
+void button_list(int i){
+  vector<In_Box> buttons(i);
+  for (int k = 0; k < i; ++k)
+  {
+    stringstream s;
+    s<<(k);
+    buttons[k] = In_box(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,s.str(),FlipFlap::cb_flip)
+    win.attach(buttons[k]);
+  }
+}
+
 void FlipFlap::setup(int level){
   //draw pancakes
   game_stack = pancake_stack(level);
