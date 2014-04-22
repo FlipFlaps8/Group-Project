@@ -5,10 +5,9 @@
 
 #include "FlipFlap.h"
 
-FlipFlap engine;      //create the game engine
-
 int main()
   try{
+    FlipFlap engine;      //create the game engine
     srand(time(0));
     switch(engine.current_screen()){  //check game state
       case FlipFlap::SPLASH_SCREEN:
