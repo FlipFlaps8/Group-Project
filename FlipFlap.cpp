@@ -26,7 +26,6 @@ vector<int> pancake_stack(int l){
 }
 
 void FlipFlap::flip(int p){
-        cout<<p;
         for(Pancake* pancake : game_stack_p){
                 detach(*pancake);
         }
