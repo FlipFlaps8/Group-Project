@@ -25,14 +25,37 @@ vector<int> pancake_stack(int l){
   return pancakes;
 }
 
-void button_list(int i){
-  vector<Button> buttons(i);
-  for (int k =  1; k <= i; ++k)
+void FlipFlap::flip(int p){
+        cout<<p;
+        for(Pancake* pancake : game_stack_p){
+                detach(*pancake);
+        }
+        auto it = std::next(game_stack_p.begin(), (p-1));
+        reverse(it,game_stack_p.end());
+        for(int i = (p-1); i < game_stack.size(); ++i){
+                game_stack_p[i] = new Pancake(game_stack_p[i]->get_size(),i);
+        }
+        for(Pancake* pancake : game_stack_p){
+                attach(*pancake);
+        }
+        redraw();
+}
+
+void FlipFlap::cb_flip(Address button, Address window){
+        auto button_label = reference_to<Fl_Button>(button).label();
+        stringstream s(button_label);
+        int pancake = 0;
+        s>>pancake;
+        reference_to<FlipFlap>(window).flip(pancake);
+}
+
+void FlipFlap::button_list(int i){
+  Vector_ref<Button> buttons;
+  for (int k = 0; k < (i-1); ++k)
   {
-    stringstream s;
-    s<<(k);
-    buttons[k] = Button(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,s.str(),FlipFlap::cb_flip)
-    win.attach(buttons[k]);
+    string* s = new string(to_string(k+1));
+    buttons.push_back(new Button(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,*s,cb_flip));
+    attach(buttons[k]);
   }
 }
 
@@ -44,22 +67,11 @@ void FlipFlap::setup(int level){
     game_stack_p[i] = new Pancake(game_stack[i],i);
   }
   for(Pancake* pancake : game_stack_p){
-    win.attach(*pancake);
+    attach(*pancake);
   }
   //draw buttons
+  button_list(level);
   //display score
-}
-
-void FlipFlap::cb_flip(Address button, Address window){
-        auto button_label reference_to<Fl_Button>(button).label();
-        stringstream s(button_label);
-        int pancake = 0;
-        s>>pancake;
-        flip(pancake);
-}
-
-void FlipFlap::flip(int p){
-
 }
 
 void FlipFlap::show_splash(){
@@ -71,7 +83,7 @@ void FlipFlap::show_levels(){
 }
 
 void FlipFlap::show_game(){
-  setup(9);
+    setup(9);
 }
 
 void FlipFlap::show_scores(){
