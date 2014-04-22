@@ -23,7 +23,6 @@ struct FlipFlap : Simple_window {
   void done();
 
   void setup(int l);
-  void update();
   static void cb_flip(Address button, Address window);
   void flip(int p);
 
