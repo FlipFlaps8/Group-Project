@@ -101,6 +101,6 @@ void FlipFlap::show_game(){
 }
 
 void FlipFlap::show_scores(){
-  Text t(Point(100,100),"Congratulations, you won!");
-  attach(t);
+  Text* t = new Text(Point(100,100),"Congratulations, you won!");
+  attach(*t);
 }
