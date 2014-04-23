@@ -3,6 +3,7 @@
 //FlipFlap.cpp
 
 #include "FlipFlap.h"
+#inclue "find_solution.h"
 //add whatever includes you need to make your show function work
 
 bool FlipFlap::is_running(){
@@ -66,7 +67,6 @@ void FlipFlap::cb_flip(Address button, Address window){
 }
 
 void FlipFlap::button_list(int i){
-  Vector_ref<Button> buttons;
   for (int k = 0; k < (i-1); ++k)
   {
     string* s = new string(to_string(k+1));
