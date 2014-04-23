@@ -37,5 +37,6 @@ struct FlipFlap : Simple_window {
   int screen;
   vector<int> game_stack;
   vector<Pancake*> game_stack_p;
+  Vector_ref<Button> buttons;
 };
 #endif
