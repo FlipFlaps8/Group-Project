@@ -9,20 +9,7 @@ int main()
   try{
     FlipFlap engine;      //create the game engine
     srand(time(0));
-    switch(engine.current_screen()){  //check game state
-      case FlipFlap::SPLASH_SCREEN:
-        engine.show_splash();         //show_x() functions actually do things
-        break;
-      case FlipFlap::LEVELS_SCREEN:
-        engine.show_levels();
-        break;
-      case FlipFlap::GAME_SCREEN:
-        engine.show_game();
-        break;
-      case FlipFlap::SCORES_SCREEN:
-        engine.show_scores();
-        break;
-      }
+    engine.show_splash();
     return gui_main();
   }
   catch(exception& e){
