@@ -42,6 +42,8 @@ void FlipFlap::flip(int p){
                 for(Pancake* pancake : game_stack_p){
                         detach(*pancake);
                 }
+                for(int i = 0; i < buttons.size(); ++i)
+                        detach(buttons[i]);
                 show_scores();
         }
 }
