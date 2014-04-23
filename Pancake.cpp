@@ -15,3 +15,7 @@ Point pPoint(int s, int p){
 }
 
 Pancake::Pancake(int size, int position) : Rectangle(pPoint(size,position),width1(size),20), s(size), p(position){}
+
+int Pancake::get_size(){
+        return s;
+}
