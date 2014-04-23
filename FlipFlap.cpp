@@ -38,6 +38,21 @@ void FlipFlap::flip(int p){
                 attach(*pancake);
         }
         redraw();
+        if(check_score()){
+                for(Pancake* pancake : game_stack_p){
+                        detach(*pancake);
+                }
+                show_scores();
+        }
+}
+
+bool FlipFlap::check_score(){
+        bool in_order = true;
+        for(int i = 0; i < (game_stack_p.size() - 1); ++i){
+                if(game_stack_p[i]->get_size() < game_stack_p[i+1]->get_size())
+                        in_order = false;
+        }
+        return in_order;
 }
 
 void FlipFlap::cb_flip(Address button, Address window){
@@ -74,17 +89,18 @@ void FlipFlap::setup(int level){
 }
 
 void FlipFlap::show_splash(){
-
+        show_levels();
 }
 
 void FlipFlap::show_levels(){
-
+        show_game();
 }
 
 void FlipFlap::show_game(){
-    setup(9);
+  setup(9);
 }
 
 void FlipFlap::show_scores(){
-
+  Text t(Point(100,100),"Congratulations, you won!");
+  attach(t);
 }
