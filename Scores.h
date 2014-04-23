@@ -1,3 +1,6 @@
+//Group 8
+//CSCE 121-501
+//Scores.h
 #include "std_lib_facilities_4.h"
 using namespace std;
 
@@ -11,16 +14,16 @@ class Scores
 public:
 
 	Scores();
-	
+
 	void read_highscores();
-	
+
 	void write_highscores();
-	
-	void game_score(string initials, int score);
-	
+
+	int game_score(string initials, int score);
+
 	vector<Player> get_highscores();
-	
+
 private:
-	
+
 	vector<Player> scores;
 };
