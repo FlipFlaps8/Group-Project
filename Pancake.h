@@ -10,6 +10,7 @@ using namespace Graph_lib;
 
 struct Pancake : Rectangle {
   Pancake(int size, int position);
+  int get_size();
   int s;
   int p;
 };
