@@ -7,6 +7,7 @@
 
 #include "Simple_window.h"
 #include "Pancake.h"
+#include "Scores.h"
 #include "GUI.h"
 #include <FL/Fl_Button.H>
 
@@ -31,6 +32,7 @@ struct FlipFlap : Simple_window {
   void show_game();
   void show_scores();
   void button_list(int i);
+  int calc_score(int flips);
 
   private:
   bool running;
@@ -38,5 +40,11 @@ struct FlipFlap : Simple_window {
   vector<int> game_stack;
   vector<Pancake*> game_stack_p;
   Vector_ref<Button> buttons;
+  int current_level;
+  Scores scores;
+  string initials;
+  int current_flips;
+  int current_score;
+  int min_flips;
 };
 #endif
