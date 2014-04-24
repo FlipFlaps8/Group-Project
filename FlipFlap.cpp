@@ -104,7 +104,7 @@ void FlipFlap::setup(int level){
   //display score
   //get min_flips
   vector<int> solution* = find_solution(game_stack);
-  min_flips = solution->size(); //replace with find_solution
+  min_flips = solution->size();
 }
 
 void FlipFlap::show_splash(){
