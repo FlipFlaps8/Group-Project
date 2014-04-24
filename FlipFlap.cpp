@@ -6,18 +6,6 @@
 #inclue "find_solution.h"
 //add whatever includes you need to make your show function work
 
-bool FlipFlap::is_running(){
-  return running;
-}
-
-int FlipFlap::current_screen(){
-  return screen;
-}
-
-void FlipFlap::done(){
-  running = false;
-}
-
 vector<int> pancake_stack(int l){
   vector<int> pancakes(l);
   for(int i =0; i < l; ++i)
