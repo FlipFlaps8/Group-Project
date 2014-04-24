@@ -30,7 +30,7 @@ void Scores::write_highscores(){
   }
   oscore_file.close();
 }
-int Scores::game_score(string initials, int score){
+void Scores::game_score(string initials, int score){
 	int count = 0;
 	cout<<"Test3"<<endl;
 	while(count<5 && scores[count].score>score){
