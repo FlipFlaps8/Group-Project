@@ -8,7 +8,7 @@
 
 Scores::Scores(){
 	read_highscores();
-};
+}
 void Scores::read_highscores(){
   string filename = "HighScore.txt";
   ifstream iscore_file(filename.c_str());
