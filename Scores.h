@@ -19,7 +19,7 @@ public:
 
 	void write_highscores();
 
-	int game_score(string initials, int score);
+	void game_score(string initials, int score);
 
 	vector<Player> get_highscores();
 
