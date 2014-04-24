@@ -21,12 +21,13 @@ void FlipFlap::done(){
 vector<int> pancake_stack(int l){
   vector<int> pancakes(l);
   for(int i =0; i < l; ++i)
-    pancakes[i] = i;
+    pancakes[i] = i + 1;
   random_shuffle(pancakes.begin(), pancakes.end());
   return pancakes;
 }
 
 void FlipFlap::flip(int p){
+        ++current_flips;
         for(Pancake* pancake : game_stack_p){
                 detach(*pancake);
         }
@@ -38,6 +39,10 @@ void FlipFlap::flip(int p){
         for(Pancake* pancake : game_stack_p){
                 attach(*pancake);
         }
+        //out box with calc_score and current_flips. Make outbox in .h and put
+        //in setup as well so it's always there
+        cout<<calc_score(current_flips)<<' '<<min_flips<<' '<<current_flips<<'\n';
+        // ^ replace with out box
         redraw();
         if(check_score()){
                 for(Pancake* pancake : game_stack_p){
@@ -75,7 +80,16 @@ void FlipFlap::button_list(int i){
   }
 }
 
+int FlipFlap::calc_score(int flips){
+        if(flips>min_flips)
+                return (100 - 10 * (flips - min_flips)) * current_level;
+        else
+                return 100 * current_level;
+}
+
 void FlipFlap::setup(int level){
+  current_flips = 0;
+  current_level = level;
   //draw pancakes
   game_stack = pancake_stack(level);
   game_stack_p.resize(game_stack.size());
@@ -88,13 +102,21 @@ void FlipFlap::setup(int level){
   //draw buttons
   button_list(level);
   //display score
+  //get min_flips
+  min_flips = 3; //replace with find_solution
 }
 
 void FlipFlap::show_splash(){
+        //make a splash
+        //make a start game button
+        //make instructions
         show_levels();
 }
 
 void FlipFlap::show_levels(){
+        //take in initials
+        //read scores
+        //make level buttons
         show_game();
 }
 
@@ -105,4 +127,8 @@ void FlipFlap::show_game(){
 void FlipFlap::show_scores(){
   Text* t = new Text(Point(100,100),"Congratulations, you won!");
   attach(*t);
+  //display initials
+  //write highscores
+  //read and display new highscores
+  //make buttons to either play again or quit
 }
