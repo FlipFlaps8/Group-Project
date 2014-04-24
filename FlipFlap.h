@@ -15,13 +15,7 @@ using namespace Graph_lib;
 
 struct FlipFlap : Simple_window {
 
-  enum{SPLASH_SCREEN, LEVELS_SCREEN, GAME_SCREEN, SCORES_SCREEN};
-
-  FlipFlap(): Simple_window(Point(100,100),600,400,"FlipFlap"), running(true), screen(FlipFlap::SPLASH_SCREEN){}
-
-  bool is_running();
-  int current_screen();
-  void done();
+  FlipFlap(): Simple_window(Point(100,100),600,400,"FlipFlap"){}
 
   void setup(int l);
   static void cb_flip(Address button, Address window);
@@ -35,8 +29,6 @@ struct FlipFlap : Simple_window {
   int calc_score(int flips);
 
   private:
-  bool running;
-  int screen;
   vector<int> game_stack;
   vector<Pancake*> game_stack_p;
   Vector_ref<Button> buttons;
