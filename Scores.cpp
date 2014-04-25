@@ -1,7 +1,7 @@
 //Group 8
 //CSCE 121-501
 //Scores.h
-#include "scores.h"
+#include "Scores.h"
 #include "std_lib_facilities_4.h"
 #include <iostream>
 #define MAX_SCORES 5

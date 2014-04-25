@@ -105,13 +105,14 @@ void FlipFlap::show_splash(){
 void FlipFlap::show_levels(){
         //take in initials
         //read scores
-        //make level buttons
-        show_game();
+        level_list()
+		
+        //show_game(); //For deletion? 
 }
 
-void FlipFlap::show_game(){
+/*void FlipFlap::show_game(){
   setup(9);
-}
+}*/ //For deletion?
 
 void FlipFlap::show_scores(){
   Text* t = new Text(Point(100,100),"Congratulations, you won!");
@@ -120,4 +121,19 @@ void FlipFlap::show_scores(){
   //write highscores
   //read and display new highscores
   //make buttons to either play again or quit
+}
+void FlipFlap::level_list(){
+  for (int k = 2; k < 10; ++k)
+  {
+    string* L = new string(to_string(k));
+    buttons.push_back(new Button(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,*L,cb_select));
+    attach(buttons[k]);
+  }
+}
+void FlipFlap::cb_select(Address l_button, Address window){
+        auto button_level = reference_to<Fl_Button>(l_button).label();
+        stringstream L(button_level);
+        int selected_level = 0;
+        L>>selected_level;
+        setup(selected_level);
 }
