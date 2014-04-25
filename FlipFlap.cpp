@@ -132,18 +132,19 @@ void FlipFlap::show_levels(){
 }
 
 void FlipFlap::show_scores(){
-  Text* t = new Text(Point(100,100),"Congratulations, you won!");
+  stringstream ss;
+  ss<<"Congratulations, "<<initials<<", you won! Your score was: "<<calc_score(current_flips);
+  Text* t = new Text(Point(100,100),ss.str());
   attach(*t);
-  //display initials
-  //write highscores
-  //read and display new highscores
+  scores.game_score(initials,calc_score(current_flips));
+  scores.write_highscores();
   //make buttons to either play again or quit
 }
 void FlipFlap::level_list(){
   for (int k = 2; k < 10; ++k)
   {
     string* L = new string(to_string(k));
-    level_buttons.push_back(new Button(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,*L,cb_select));
+    level_buttons.push_back(new Button(Point(X_CENTER - 50,TABLE_TOP + 100 - 30*k),100,20,*L,cb_select));
     attach(level_buttons[k-2]);
   }
 }
