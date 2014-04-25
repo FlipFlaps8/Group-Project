@@ -31,11 +31,13 @@ struct FlipFlap : Simple_window {
   void update_boxes();
   void level_list();
   static void cb_select(Address l_button, Address window);
+  void print_highscores();
 
   private:
   vector<int> game_stack;
   vector<Pancake*> game_stack_p;
   Vector_ref<Button> buttons;
+  Vector_ref<Text> high_score_list;
   int current_level;
   Scores scores;
   string initials;
