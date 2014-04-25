@@ -104,7 +104,7 @@ void FlipFlap::show_splash(){
 
 void FlipFlap::show_levels(){
         //take in initials
-        //read scores
+        Scores::read_highscores()
         level_list()
 		
         //show_game(); //For deletion? 
