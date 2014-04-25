@@ -97,6 +97,8 @@ void FlipFlap::add_boxes(){
 void FlipFlap::setup(int level){
   for(int i = 0; i < level_buttons.size(); ++i)
     detach(level_buttons[i]);
+  for(int i = 0; i < high_score_list.size(); ++i)
+    detach(high_score_list[i]);
   current_flips = 0;
   current_level = level;
   //draw pancakes
@@ -118,6 +120,21 @@ void FlipFlap::setup(int level){
   redraw();
 }
 
+void FlipFlap::print_highscores(){
+        high_score_list.push_back(new Text(Point(100,100),"High scores:"));
+        attach(high_score_list[0]);
+        vector<Player> players = scores.get_highscores();
+        for(int i = 1; i<6; ++i){
+                stringstream scorestream;
+                string tab = "\t";
+                scorestream<<players[i-1].name<<tab<<players[i-1].score;
+                high_score_list.push_back(new Text(Point(100,100 + i * 40),scorestream.str()));
+                attach(high_score_list[i]);
+        }
+        high_score_list.push_back(new Text(Point(250,50),"Select you level:"));
+        attach(high_score_list[high_score_list.size()-1]);
+}
+
 void FlipFlap::show_splash(){
         //make a splash
         //make a start game button
@@ -127,7 +144,7 @@ void FlipFlap::show_splash(){
 
 void FlipFlap::show_levels(){
         //take in initials
-        scores.read_highscores();
+        print_highscores();
         level_list();
 }
 
