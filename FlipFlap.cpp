@@ -27,10 +27,7 @@ void FlipFlap::flip(int p){
         for(Pancake* pancake : game_stack_p){
                 attach(*pancake);
         }
-        //out box with calc_score and current_flips. Make outbox in .h and put
-        //in setup as well so it's always there
-        cout<<calc_score(current_flips)<<' '<<min_flips<<' '<<current_flips<<'\n';
-        // ^ replace with out box
+        update_boxes();
         redraw();
         if(check_score()){
                 for(Pancake* pancake : game_stack_p){
@@ -75,7 +72,31 @@ int FlipFlap::calc_score(int flips){
                 return 100 * current_level;
 }
 
+void FlipFlap::update_boxes(){
+  stringstream ss;
+  ss << min_flips;
+  min_box->put(ss.str());
+  stringstream flbox;
+  flbox << current_flips;
+  flips_box->put(flbox.str());
+  stringstream scbox;
+  scbox << calc_score(current_flips);
+  score_box->put(scbox.str());
+}
+
+void FlipFlap::add_boxes(){
+  min_box = new Out_box(Point(150,0),25,20,"Can be done in:");
+  flips_box = new Out_box(Point(300,0),30,20,"Current flips:");
+  score_box = new Out_box(Point(450,0),50,20,"Current score:");
+  attach(*min_box);
+  attach(*flips_box);
+  attach(*score_box);
+  update_boxes();
+}
+
 void FlipFlap::setup(int level){
+  for(int i = 0; i < level_buttons.size(); ++i)
+    detach(level_buttons[i]);
   current_flips = 0;
   current_level = level;
   //draw pancakes
@@ -87,12 +108,14 @@ void FlipFlap::setup(int level){
   for(Pancake* pancake : game_stack_p){
     attach(*pancake);
   }
-  //draw buttons
-  button_list(level);
-  //display score
   //get min_flips
   vector<int> *solution = find_solution(game_stack);
   min_flips = solution->size();
+  //draw buttons
+  button_list(level);
+  //display score
+  add_boxes();
+  redraw();
 }
 
 void FlipFlap::show_splash(){
@@ -104,15 +127,9 @@ void FlipFlap::show_splash(){
 
 void FlipFlap::show_levels(){
         //take in initials
-        Scores::read_highscores()
-        level_list()
-		
-        //show_game(); //For deletion? 
+        scores.read_highscores();
+        level_list();
 }
-
-/*void FlipFlap::show_game(){
-  setup(9);
-}*/ //For deletion?
 
 void FlipFlap::show_scores(){
   Text* t = new Text(Point(100,100),"Congratulations, you won!");
@@ -126,8 +143,8 @@ void FlipFlap::level_list(){
   for (int k = 2; k < 10; ++k)
   {
     string* L = new string(to_string(k));
-    buttons.push_back(new Button(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,*L,cb_select));
-    attach(buttons[k]);
+    level_buttons.push_back(new Button(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,*L,cb_select));
+    attach(level_buttons[k-2]);
   }
 }
 void FlipFlap::cb_select(Address l_button, Address window){
@@ -135,5 +152,5 @@ void FlipFlap::cb_select(Address l_button, Address window){
         stringstream L(button_level);
         int selected_level = 0;
         L>>selected_level;
-        setup(selected_level);
+        reference_to<FlipFlap>(window).setup(selected_level);
 }
