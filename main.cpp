@@ -7,17 +7,17 @@
 
 int main()
   try{
-    FlipFlap engine;      //create the game engine
-    srand(time(0));
-    engine.show_splash();
-    return gui_main();
+    FlipFlap engine;                        //create the game engine
+    srand(time(0));                         //initialize randomizer
+    engine.show_splash();                   //show the splash screen
+    return gui_main();                      //run game
   }
-  catch(exception& e){
+  catch(exception& e){                      //print exceptions
     cerr<<"Error: "<<e.what()<<'\n';
     keep_window_open();
     return 1;
   }
-  catch(...){
+  catch(...){                               //catch unknown errors
     cerr<<"Unknown error\n";
     keep_window_open();
     return 2;
