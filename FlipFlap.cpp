@@ -76,143 +76,141 @@ void FlipFlap::button_list(int i){						//create list of flip buttons
     attach(buttons[k]);								//attach each button
 }
 
-int FlipFlap::calc_score(int flips){						//
-        if(flips>min_flips)
-                return (100 - 10 * (flips - min_flips)) * current_level;
+int FlipFlap::calc_score(int flips){						//get current score
+        if(flips>min_flips)							//if they have passed minimun threshold
+                return (100 - 10 * (flips - min_flips)) * current_level;	//return score
         else
-                return 100 * current_level;
+                return 100 * current_level;					//return ideal score
 }
 
-void FlipFlap::update_boxes(){
-  stringstream ss;
-  ss << min_flips;
-  min_box->put(ss.str());
-  stringstream flbox;
+void FlipFlap::update_boxes(){							//update on-screen counters
+  stringstream ss;								//put min_flips into a string
+  ss << min_flips;		
+  min_box->put(ss.str());							//display minimun flips needed
+  stringstream flbox;								//put current flips into a string
   flbox << current_flips;
-  flips_box->put(flbox.str());
-  stringstream scbox;
+  flips_box->put(flbox.str());							//display current flips
+  stringstream scbox;								//put score in a string
   scbox << calc_score(current_flips);
-  score_box->put(scbox.str());
+  score_box->put(scbox.str());							//display current score
 }
 
-void FlipFlap::add_boxes(){
-  min_box = new Out_box(Point(150,0),25,20,"Can be done in:");
-  flips_box = new Out_box(Point(300,0),30,20,"Current flips:");
-  score_box = new Out_box(Point(450,0),50,20,"Current score:");
-  attach(*min_box);
+void FlipFlap::add_boxes(){							//create counter boxes
+  min_box = new Out_box(Point(150,0),25,20,"Can be done in:");			//display minumun needed flips
+  flips_box = new Out_box(Point(300,0),30,20,"Current flips:");			//display flips taken
+  score_box = new Out_box(Point(450,0),50,20,"Current score:");			//display current score
+  attach(*min_box);								//attach boxes
   attach(*flips_box);
   attach(*score_box);
-  update_boxes();
+  update_boxes();								//call update
 }
 
-void FlipFlap::setup(int level){
-  initials=name_box->get_string();
-  if(initials.size() == 0)
+void FlipFlap::setup(int level){						//setup play screen
+  initials=name_box->get_string();						//get their initials
+  if(initials.size() == 0)							//if none entered, create "---"
         initials = "---";
-  detach(*name_box);
-  for(int i = 0; i < level_buttons.size(); ++i)
+  detach(*name_box);								//remove input box from screen
+  for(int i = 0; i < level_buttons.size(); ++i)					//remove level select buttons from screen
     detach(level_buttons[i]);
-  for(int i = 0; i < high_score_list.size(); ++i)
+  for(int i = 0; i < high_score_list.size(); ++i)				//remove high schores from screen
     detach(high_score_list[i]);
   current_flips = 0;
   current_level = level;
   //draw pancakes
-  game_stack = pancake_stack(level);
-  game_stack_p.resize(game_stack.size());
+  game_stack = pancake_stack(level);						//initialize stack of ints
+  game_stack_p.resize(game_stack.size());					//initialize stack of pancakes
   for(int i = 0; i < game_stack.size(); ++i){
     game_stack_p[i] = new Pancake(game_stack[i],i);
   }
-  for(Pancake* pancake : game_stack_p){
+  for(Pancake* pancake : game_stack_p){						//attach stack of pancakes
     attach(*pancake);
   }
   //get min_flips
-  vector<int> *solution = find_solution(game_stack);
+  vector<int> *solution = find_solution(game_stack);				//calculate minimum needed flips
   min_flips = solution->size();
   //draw buttons
-  button_list(level);
+  button_list(level);								//create flip buttons
   //display score
-  add_boxes();
-  redraw();
+  add_boxes();									//add on screen counters
+  redraw();									//draw window
 }
 
-void FlipFlap::print_highscores(){
-	high_score_list.clear();
-        high_score_list.push_back(new Text(Point(100,100),"High scores:"));
+void FlipFlap::print_highscores(){						//show high scores
+	high_score_list.clear();						//clear existing list
+        high_score_list.push_back(new Text(Point(100,100),"High scores:"));	//add title
         attach(high_score_list[0]);
-        vector<Player> players = scores.get_highscores();
+        vector<Player> players = scores.get_highscores();			//get list from scores
         for(int i = 1; i<6; ++i){
                 stringstream scorestream;
                 string tab = "\t";
-                scorestream<<players[i-1].name<<tab<<players[i-1].score;
+                scorestream<<players[i-1].name<<tab<<players[i-1].score;	//print name and score
                 high_score_list.push_back(new Text(Point(100,100 + i * 40),scorestream.str()));
                 attach(high_score_list[i]);
         }
-        high_score_list.push_back(new Text(Point(250,50),"Select your level:"));
+        high_score_list.push_back(new Text(Point(250,50),"Select your level:")); //ask for level
         attach(high_score_list[high_score_list.size()-1]);
 }
 
-void FlipFlap::show_splash(){
+void FlipFlap::show_splash(){							//display splash screen
         //make a splash
         //make a start game button
         //make instructions
-        show_levels();
+        show_levels();								//go to level select
 }
 
-void FlipFlap::show_levels(){
-        //take in initials
-	name_box = new In_box(Point(X_CENTER,90),100,20,"Enter your initials");
+void FlipFlap::show_levels(){							//setup game
+	name_box = new In_box(Point(X_CENTER,90),100,20,"Enter your initials"); //get initials
         attach(*name_box);
         initials = "--";
-        scores.read_highscores();
-        print_highscores();
-        level_list();
+        scores.read_highscores();						//get high schores from scores
+        print_highscores();							//display high scores
+        level_list();								//create list of level select buttons
 }
 
-void FlipFlap::show_scores(int i){
+void FlipFlap::show_scores(int i){						//end screen
   stringstream ss;
-   if (i == 0)
-    ss<<"Congratulations, "<<initials<<", you won! Your score was: "<<calc_score(current_flips);
-  else
-    ss<<"Sorry, "<<initials<<", you lost.  Your score was 0.";
+   if (i == 0)									//if they won
+    ss<<"Congratulations, "<<initials<<", you won! Your score was: "<<calc_score(current_flips); //print name and score
+  else										//if they lost
+    ss<<"Sorry, "<<initials<<", you lost.  Your score was 0.";			//print name 
   end_text = new Text(Point(100,100),ss.str());
   attach(*end_text);
-  scores.game_score(initials,calc_score(current_flips));
+  scores.game_score(initials,calc_score(current_flips));			//write name and score to scores
   scores.write_highscores();
-   //make buttons to either play again or quit
-  replay = new Button(Point(100,200),70,20,"Play again?",cb_replay);
+  replay = new Button(Point(100,200),70,20,"Play again?",cb_replay);		//ask if they want to play again
   attach(*replay);
 }
-void FlipFlap::level_list(){
-  if (level_buttons.size() == 0){
-    for (int k = 2; k < 10; ++k)
+void FlipFlap::level_list(){							//create list of level select buttons
+  if (level_buttons.size() == 0){						//if not full already
+    for (int k = 2; k < 10; ++k)						//create buttons
     {
       string* L = new string(to_string(k));
       level_buttons.push_back(new Button(Point(X_CENTER - 50,TABLE_TOP + 100 - 30*k),100,20,*L,cb_select));
     }
   }
-  for (int k = 2; k < 10; ++k){
+  for (int k = 2; k < 10; ++k){							//attach buttons
     attach(level_buttons[k-2]);
   }
 }
 
-void FlipFlap::cb_select(Address l_button, Address window){
-        auto button_level = reference_to<Fl_Button>(l_button).label();
+void FlipFlap::cb_select(Address l_button, Address window){			//select callback
+        auto button_level = reference_to<Fl_Button>(l_button).label();		//get level from name of button
         stringstream L(button_level);
         int selected_level = 0;
         L>>selected_level;
-        reference_to<FlipFlap>(window).setup(selected_level);
+        reference_to<FlipFlap>(window).setup(selected_level);			//pass to setup
 }
-void FlipFlap::new_game(){
-  detach(*replay);
+void FlipFlap::new_game(){							//function to restart
+  detach(*replay);								//remove everything from window
   detach(*end_text);
   detach(*min_box);
   detach(*flips_box);
   detach(*score_box);
   redraw();
-  show_levels();
+  show_levels();								//call show_levels
 }
 
-void FlipFlap::cb_replay(Address, Address window){
-  reference_to<FlipFlap>(window).new_game();
+void FlipFlap::cb_replay(Address, Address window){				//replay button callback
+  reference_to<FlipFlap>(window).new_game();					//pass window to new_game()
 }
 
