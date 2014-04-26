@@ -15,44 +15,44 @@ using namespace Graph_lib;
 
 struct FlipFlap : Simple_window {
 
-  FlipFlap(): Simple_window(Point(100,100),600,400,"FlipFlap"){}
+  FlipFlap(): Simple_window(Point(100,100),600,400,"FlipFlap"){}            //create window
 
-  void setup(int l);
-  static void cb_flip(Address button, Address window);
-  void flip(int p);
+  void setup(int l);                                                        //setup play screen
+  static void cb_flip(Address button, Address window);                      //callback to flip pancakes
+  void flip(int p);                                                         //function to handle flipping pancakes
 
-  void show_splash();
-  void show_levels();
-  void show_game();
-  void show_scores(int i);
-  void button_list(int i);
-  int calc_score(int flips);
-  void add_boxes();
-  void update_boxes();
-  void level_list();
-  static void cb_select(Address l_button, Address window);
-  static void cb_replay(Address, Address window);
-  bool check_score();
-  void print_highscores();
-  void new_game();
+  void show_splash();                                                       //show the splash screen
+  void show_levels();                                                       //level select screen
+  void show_game();                                                         //show game
+  void show_scores(int i);                                                  //display high scores
+  void button_list(int i);                                                  //create pancake flipping buttons
+  int calc_score(int flips);                                                //calculate current score
+  void add_boxes();                                                         //add on screen counter boxes
+  void update_boxes();                                                      //update counters
+  void level_list();                                                        //make list of level select buttons
+  static void cb_select(Address l_button, Address window);                  //call back for level select buttons
+  static void cb_replay(Address, Address window);                           //call back for game replay button
+  bool check_score();                                                       //check to see if won
+  void print_highscores();                                                  //print high scores to screen
+  void new_game();                                                          //create new game
 
   private:
-  vector<int> game_stack;
-  vector<Pancake*> game_stack_p;
-  Vector_ref<Button> buttons;
-  Vector_ref<Text> high_score_list;
-  int current_level;
-  Scores scores;
-  string initials;
-  int current_flips;
-  int current_score;
-  int min_flips;
-  Vector_ref<Button> level_buttons;
-  In_box* name_box;
-  Out_box* min_box;
-  Out_box* flips_box;
-  Out_box* score_box;
-  Button* replay;
-  Text* end_text;
+  vector<int> game_stack;                                                   //ints to represent pancakes
+  vector<Pancake*> game_stack_p;                                            //vector of pancakes
+  Vector_ref<Button> buttons;                                               //vector of flip buttons
+  Vector_ref<Text> high_score_list;                                         //list of high scores
+  int current_level;                                                        //level selected
+  Scores scores;                                                            //scores object
+  string initials;                                                          //player initials
+  int current_flips;                                                        //flips made so far
+  int current_score;                                                        //current score
+  int min_flips;                                                            //minimun flips necessary
+  Vector_ref<Button> level_buttons;                                         //vector of level select buttons
+  In_box* name_box;                                                         //input to receive player initials
+  Out_box* min_box;                                                         //display minimun moves necessary
+  Out_box* flips_box;                                                       //display flips made
+  Out_box* score_box;                                                       //display current score
+  Button* replay;                                                           //replay the game
+  Text* end_text;                                                           //end screen text object
 };
 #endif
