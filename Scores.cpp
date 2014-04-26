@@ -7,7 +7,6 @@
 #define MAX_SCORES 5
 
 Scores::Scores(){
-	read_highscores();
 }
 void Scores::read_highscores(){
   string filename = "HighScore.txt";
@@ -29,6 +28,7 @@ void Scores::write_highscores(){
 	oscore_file<<scores[i].name<<' '<<scores[i].score<<' ';
   }
   oscore_file.close();
+  scores.clear();
 }
 void Scores::game_score(string initials, int score){
 	int count = 0;
