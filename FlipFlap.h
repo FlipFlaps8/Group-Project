@@ -31,7 +31,7 @@ struct FlipFlap : Simple_window {
   void update_boxes();
   void level_list();
   static void cb_select(Address l_button, Address window);
-  static void cb_replay(Address, Address window)
+  static void cb_replay(Address, Address window);
   bool check_score();
   void print_highscores();
   void new_game();
