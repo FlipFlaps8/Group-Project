@@ -48,6 +48,7 @@ struct FlipFlap : Simple_window {
   int current_score;
   int min_flips;
   Vector_ref<Button> level_buttons;
+  In_box* name_box;
   Out_box* min_box;
   Out_box* flips_box;
   Out_box* score_box;
