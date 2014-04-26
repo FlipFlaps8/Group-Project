@@ -24,14 +24,17 @@ struct FlipFlap : Simple_window {
   void show_splash();
   void show_levels();
   void show_game();
-  void show_scores();
+  void show_scores(int i);
   void button_list(int i);
   int calc_score(int flips);
   void add_boxes();
   void update_boxes();
   void level_list();
   static void cb_select(Address l_button, Address window);
+  static void cb_replay(Address, Address window)
+  bool check_score();
   void print_highscores();
+  void new_game();
 
   private:
   vector<int> game_stack;
@@ -48,5 +51,7 @@ struct FlipFlap : Simple_window {
   Out_box* min_box;
   Out_box* flips_box;
   Out_box* score_box;
+  Button* replay;
+  Text* end_text;
 };
 #endif
