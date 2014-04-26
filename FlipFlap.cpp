@@ -33,10 +33,19 @@ void FlipFlap::flip(int p){
                 for(Pancake* pancake : game_stack_p){
                         detach(*pancake);
                 }
-                for(int i = 0; i < buttons.size(); ++i)
+                for(int i = 0; i < (current_level-1); ++i)
                         detach(buttons[i]);
-                show_scores();
+                show_scores(0);
         }
+       if(calc_score(current_flips) == 0){\
+         for(Pancake* pancake : game_stack_p){
+                        detach(*pancake);
+                }
+                for(int i = 0; i < (current_level-1); ++i)
+                        detach(buttons[i]);
+                show_scores(1);
+       }
+
 }
 
 bool FlipFlap::check_score(){
@@ -57,12 +66,14 @@ void FlipFlap::cb_flip(Address button, Address window){
 }
 
 void FlipFlap::button_list(int i){
-  for (int k = 0; k < (i-1); ++k)
-  {
-    string* s = new string(to_string(k+1));
-    buttons.push_back(new Button(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,*s,cb_flip));
-    attach(buttons[k]);
+   if (buttons.size() == 0){
+    for (int k = 0; k < 8; ++k){
+      string* s = new string(to_string(k+1));
+      buttons.push_back(new Button(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,*s,cb_flip));
+    }
   }
+  for (int k = 0; k < (i-1); ++k)
+    attach(buttons[k]);
 }
 
 int FlipFlap::calc_score(int flips){
@@ -152,21 +163,31 @@ void FlipFlap::show_levels(){
 
 void FlipFlap::show_scores(){
   stringstream ss;
-  ss<<"Congratulations, "<<initials<<", you won! Your score was: "<<calc_score(current_flips);
+   if (i == 0)
+    ss<<"Congratulations, "<<initials<<", you won! Your score was: "<<calc_score(current_flips);
+  else
+    ss<<"Sorry, "<<initials<<", you lost.  Your score was 0.";
   Text* t = new Text(Point(100,100),ss.str());
   attach(*t);
   scores.game_score(initials,calc_score(current_flips));
   scores.write_highscores();
-  //make buttons to either play again or quit
+   //make buttons to either play again or quit
+  replay = new Button(Point(100,200),70,20,"Play again?",cb_replay);
+  attach(*replay);
 }
 void FlipFlap::level_list(){
-  for (int k = 2; k < 10; ++k)
-  {
-    string* L = new string(to_string(k));
-    level_buttons.push_back(new Button(Point(X_CENTER - 50,TABLE_TOP + 100 - 30*k),100,20,*L,cb_select));
+  if (level_buttons.size() == 0){
+    for (int k = 2; k < 10; ++k)
+    {
+      string* L = new string(to_string(k));
+      level_buttons.push_back(new Button(Point(X_CENTER - 50,TABLE_TOP + 100 - 30*k),100,20,*L,cb_select));
+    }
+  }
+  for (int k = 2; k < 10; ++k){
     attach(level_buttons[k-2]);
   }
 }
+
 void FlipFlap::cb_select(Address l_button, Address window){
         auto button_level = reference_to<Fl_Button>(l_button).label();
         stringstream L(button_level);
@@ -174,3 +195,17 @@ void FlipFlap::cb_select(Address l_button, Address window){
         L>>selected_level;
         reference_to<FlipFlap>(window).setup(selected_level);
 }
+void FlipFlap::new_game(){
+  detach(*replay);
+  detach(*end_text);
+  detach(*min_box);
+  detach(*flips_box);
+  detach(*score_box);
+  redraw();
+  show_levels();
+}
+
+void FlipFlap::cb_replay(Address, Address window){
+  reference_to<FlipFlap>(window).new_game();
+}
+
