@@ -144,6 +144,8 @@ void FlipFlap::show_splash(){
 
 void FlipFlap::show_levels(){
         //take in initials
+		In_Box name_box(Point(X_CENTER,TABLE_TOP),100,20,"Initials"); //Hope I did this right, unsure if you already took out hardcoded initials
+		initials=name_box.get_string();
         print_highscores();
         level_list();
 }
