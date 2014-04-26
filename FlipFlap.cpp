@@ -106,6 +106,10 @@ void FlipFlap::add_boxes(){
 }
 
 void FlipFlap::setup(int level){
+  initials=name_box->get_string();
+  if(initials.size() == 0)
+        initials = "---";
+  detach(*name_box);
   for(int i = 0; i < level_buttons.size(); ++i)
     detach(level_buttons[i]);
   for(int i = 0; i < high_score_list.size(); ++i)
@@ -132,6 +136,7 @@ void FlipFlap::setup(int level){
 }
 
 void FlipFlap::print_highscores(){
+	high_score_list.clear();
         high_score_list.push_back(new Text(Point(100,100),"High scores:"));
         attach(high_score_list[0]);
         vector<Player> players = scores.get_highscores();
@@ -155,8 +160,10 @@ void FlipFlap::show_splash(){
 
 void FlipFlap::show_levels(){
         //take in initials
-	In_Box name_box(Point(X_CENTER,TABLE_TOP),100,20,"Initials"); //Hope I did this right, unsure if you already took out hardcoded initials
-	initials=name_box.get_string();
+	name_box = new In_box(Point(X_CENTER,90),100,20,"Enter your initials");
+        attach(*name_box);
+        initials = "--";
+        scores.read_highscores();
         print_highscores();
         level_list();
 }
