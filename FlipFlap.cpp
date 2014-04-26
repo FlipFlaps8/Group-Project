@@ -6,77 +6,77 @@
 #include "find_solution.h"
 //add whatever includes you need to make your show function work
 
-vector<int> pancake_stack(int l){
-  vector<int> pancakes(l);
+vector<int> pancake_stack(int l){						//create a vector representing the stack
+  vector<int> pancakes(l);							//of pancakes
   for(int i =0; i < l; ++i)
     pancakes[i] = i + 1;
-  random_shuffle(pancakes.begin(), pancakes.end());
+  random_shuffle(pancakes.begin(), pancakes.end()); 				//randomize the stack
   return pancakes;
 }
 
-void FlipFlap::flip(int p){
-        ++current_flips;
-        for(Pancake* pancake : game_stack_p){
+void FlipFlap::flip(int p){							//flip the top p pancakes
+        ++current_flips;							//increment flips player has made
+        for(Pancake* pancake : game_stack_p){					//detach old stack from window
                 detach(*pancake);
         }
-        auto it = std::next(game_stack_p.begin(), (p-1));
+        auto it = std::next(game_stack_p.begin(), (p-1));			//flip order in the list
         reverse(it,game_stack_p.end());
         for(int i = (p-1); i < game_stack.size(); ++i){
                 game_stack_p[i] = new Pancake(game_stack_p[i]->get_size(),i);
         }
-        for(Pancake* pancake : game_stack_p){
+        for(Pancake* pancake : game_stack_p){					//re-attach the changed pancakes
                 attach(*pancake);
         }
-        update_boxes();
-        redraw();
-        if(check_score()){
-                for(Pancake* pancake : game_stack_p){
+        update_boxes();								//update on-screen counters
+        redraw();								//redraw window
+        if(check_score()){							//if stack is sorted
+                for(Pancake* pancake : game_stack_p){				//detach pancake stack
                         detach(*pancake);
                 }
-                for(int i = 0; i < (current_level-1); ++i)
+                for(int i = 0; i < (current_level-1); ++i)			//detach flip buttons
                         detach(buttons[i]);
-                show_scores(0);
+                show_scores(0);							//go to show scores (Win)
         }
-       if(calc_score(current_flips) == 0){\
-         for(Pancake* pancake : game_stack_p){
+       if(calc_score(current_flips) == 0){					//if score has hit 0
+         for(Pancake* pancake : game_stack_p){					//detach pancakes
                         detach(*pancake);
                 }
                 for(int i = 0; i < (current_level-1); ++i)
-                        detach(buttons[i]);
-                show_scores(1);
+                        detach(buttons[i]);					//detach flip buttons
+                show_scores(1);							//go to show scores (Lose)
        }
 
 }
 
-bool FlipFlap::check_score(){
-        bool in_order = true;
-        for(int i = 0; i < (game_stack_p.size() - 1); ++i){
-                if(game_stack_p[i]->get_size() < game_stack_p[i+1]->get_size())
+bool FlipFlap::check_score(){							//check if won the game
+        bool in_order = true;							//default true
+        for(int i = 0; i < (game_stack_p.size() - 1); ++i){			//if any are smaller than the one
+                if(game_stack_p[i]->get_size() < game_stack_p[i+1]->get_size()) //above them, return false
                         in_order = false;
         }
-        return in_order;
+        return in_order;							
 }
 
-void FlipFlap::cb_flip(Address button, Address window){
-        auto button_label = reference_to<Fl_Button>(button).label();
+void FlipFlap::cb_flip(Address button, Address window){				//flip callback
+        auto button_label = reference_to<Fl_Button>(button).label();		//grab position of pancake from button
         stringstream s(button_label);
         int pancake = 0;
         s>>pancake;
-        reference_to<FlipFlap>(window).flip(pancake);
+        reference_to<FlipFlap>(window).flip(pancake);				//pass the position to flip
 }
 
-void FlipFlap::button_list(int i){
-   if (buttons.size() == 0){
-    for (int k = 0; k < 8; ++k){
+void FlipFlap::button_list(int i){						//create list of flip buttons
+   if (buttons.size() == 0){							//if the vector is empty
+    for (int k = 0; k < 8; ++k){						//make buttons with names as positions
       string* s = new string(to_string(k+1));
       buttons.push_back(new Button(Point(X_CENTER - 250,TABLE_TOP - 20*k),20,20,*s,cb_flip));
     }
   }
   for (int k = 0; k < (i-1); ++k)
-    attach(buttons[k]);
+    attach(buttons[k]);								//attach each button
 }
 
-int FlipFlap::calc_score(int flips){
+int FlipFlap::calc_score(int flips){						//
         if(flips>min_flips)
                 return (100 - 10 * (flips - min_flips)) * current_level;
         else
