@@ -142,7 +142,7 @@ void FlipFlap::print_highscores(){
                 high_score_list.push_back(new Text(Point(100,100 + i * 40),scorestream.str()));
                 attach(high_score_list[i]);
         }
-        high_score_list.push_back(new Text(Point(250,50),"Select you level:"));
+        high_score_list.push_back(new Text(Point(250,50),"Select your level:"));
         attach(high_score_list[high_score_list.size()-1]);
 }
 
@@ -155,8 +155,8 @@ void FlipFlap::show_splash(){
 
 void FlipFlap::show_levels(){
         //take in initials
-		In_Box name_box(Point(X_CENTER,TABLE_TOP),100,20,"Initials"); //Hope I did this right, unsure if you already took out hardcoded initials
-		initials=name_box.get_string();
+	In_Box name_box(Point(X_CENTER,TABLE_TOP),100,20,"Initials"); //Hope I did this right, unsure if you already took out hardcoded initials
+	initials=name_box.get_string();
         print_highscores();
         level_list();
 }
@@ -167,8 +167,8 @@ void FlipFlap::show_scores(int i){
     ss<<"Congratulations, "<<initials<<", you won! Your score was: "<<calc_score(current_flips);
   else
     ss<<"Sorry, "<<initials<<", you lost.  Your score was 0.";
-  Text* t = new Text(Point(100,100),ss.str());
-  attach(*t);
+  end_text = new Text(Point(100,100),ss.str());
+  attach(*end_text);
   scores.game_score(initials,calc_score(current_flips));
   scores.write_highscores();
    //make buttons to either play again or quit
