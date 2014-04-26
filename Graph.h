@@ -1,4 +1,3 @@
-
 //
 // This is a GUI support code to the chapters 12-16 of the book
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
@@ -131,6 +130,7 @@ public:
 
     void push_back(T& s) { v.push_back(&s); }
     void push_back(T* p) { v.push_back(p); owned.push_back(p); }
+    void clear() { v.clear(); owned.clear(); }
 /*
 	void erase(int i)
 	{
