@@ -12,7 +12,6 @@ void Scores::read_highscores(){
   string filename = "HighScore.txt";
   ifstream iscore_file(filename.c_str());
   if(iscore_file){
-    cout<<"True?";
 	while(iscore_file.good()){
 		Player p;
 		iscore_file>>p.name;
@@ -32,15 +31,11 @@ void Scores::write_highscores(){
 }
 void Scores::game_score(string initials, int score){
 	int count = 0;
-	cout<<"Test3"<<endl;
 	while(count<5 && scores[count].score>score){
 		++count;
-		cout<<count<<endl;
 	}
-	cout<<count<<endl;
 	for(int i=4;i>count;--i){
 		scores[i]=scores[i-1];
-		cout<<scores[i].score;
 	}
 	Player p;
 	p.name=initials;
