@@ -3,7 +3,7 @@
 //FlipFlap.cpp
 
 #include "FlipFlap.h"
-#inclue "find_solution.h"
+#include "find_solution.h"
 //add whatever includes you need to make your show function work
 
 vector<int> pancake_stack(int l){
