@@ -161,7 +161,7 @@ void FlipFlap::show_levels(){
         level_list();
 }
 
-void FlipFlap::show_scores(){
+void FlipFlap::show_scores(int i){
   stringstream ss;
    if (i == 0)
     ss<<"Congratulations, "<<initials<<", you won! Your score was: "<<calc_score(current_flips);
