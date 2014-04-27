@@ -29,18 +29,18 @@ void Scores::write_highscores(){					//write high scores to file
   oscore_file.close();							//close file
   scores.clear();							//clear scores vector
 }
-void Scores::game_score(string initials, int score){
+void Scores::game_score(string initials, int score){			//add the latest score to the scores vector
 	int count = 0;
-	while(count<5 && scores[count].score>score){
+	while(count<5 && scores[count].score>score){			//get the position to insert the latest score
 		++count;
 	}
 	for(int i=4;i>count;--i){
-		scores[i]=scores[i-1];
+		scores[i]=scores[i-1];					//shift all smaller scores back
 	}
-	Player p;
+	Player p;     							//make a new Player with latest score
 	p.name=initials;
 	p.score=score;
-	scores[count]=p;
+	scores[count]=p;						//put the Player in the scores vector
 }
 vector<Player> Scores::get_highscores(){				//get scores vector for use
 	return scores;							//return scores vector
