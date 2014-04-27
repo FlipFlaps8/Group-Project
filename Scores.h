@@ -13,17 +13,17 @@ class Scores
 {
 public:
 
-	Scores();
+	Scores();						//constructor
 
-	void read_highscores();
+	void read_highscores();					//read high scores from file into scores vector
 
-	void write_highscores();
+	void write_highscores();				//write high scores from scores vector into file
 
-	void game_score(string initials, int score);
-
-	vector<Player> get_highscores();
+	void game_score(string initials, int score);	
+	
+	vector<Player> get_highscores();			//get scores vector
 
 private:
 
-	vector<Player> scores;
+	vector<Player> scores;					//vector of players and scores
 };
