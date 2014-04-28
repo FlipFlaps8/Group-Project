@@ -9,8 +9,8 @@
 using namespace Graph_lib;
 
 struct Pancake : Rectangle {
-  Pancake(int size, int position);
-  int get_size();
-  int s;
-  int p;
+  Pancake(int size, int position);	//constructor
+  int get_size();	//gets the size
+  int s;	//size
+  int p;	//position
 };
