@@ -32,9 +32,12 @@ struct FlipFlap : Simple_window {
   void level_list();                                                        //make list of level select buttons
   static void cb_select(Address l_button, Address window);                  //call back for level select buttons
   static void cb_replay(Address, Address window);                           //call back for game replay button
+  static void callback_showins(Address, Address pw);                        //call back for the instructions
+  static void callback_showlevels(Address, Address pw);                     //call back to show the level select
   bool check_score();                                                       //check to see if won
   void print_highscores();                                                  //print high scores to screen
   void new_game();                                                          //create new game
+  void show_ins();                                                          //show the instructions
 
   private:
   vector<int> game_stack;                                                   //ints to represent pancakes
@@ -53,6 +56,10 @@ struct FlipFlap : Simple_window {
   Out_box* flips_box;                                                       //display flips made
   Out_box* score_box;                                                       //display current score
   Button* replay;                                                           //replay the game
+  Image* instructions;                                                      //instructions screen
+  Button* playbutton;                                                       //go to game button
+  Image* splash;                                                            //splash screen
+  Button* insbutton;                                                        //go to instructions button
   Text* end_text;                                                           //end screen text object
 };
 #endif
