@@ -151,11 +151,30 @@ void FlipFlap::print_highscores(){						//show high scores
         attach(high_score_list[high_score_list.size()-1]);
 }
 
-void FlipFlap::show_splash(){							//display splash screen
-        //make a splash
-        //make a start game button
-        //make instructions
-        show_levels();								//go to level select
+void FlipFlap::callback_showins(Address, Address pw){                            //show the instructions
+                reference_to<FlipFlap>(pw).show_ins();
+}
+
+void FlipFlap::callback_showlevels(Address, Address pw){                         //go to the level select
+                reference_to<FlipFlap>(pw).show_levels();
+}
+
+void FlipFlap::show_ins(){
+        detach(*splash);                                                         //detach what's on the screen
+        detach(*insbutton);
+        instructions = new Image(Point(0,0),"instructions.jpg");                 //create the instructions image and gameplay button
+        playbutton = new Button(Point(145,290), 315, 70, "Play!", callback_showlevels);
+        attach(*instructions);                                                   //attach them
+        redraw();
+        attach(*playbutton);
+}
+
+void FlipFlap::show_splash(){                                                   //display splash screen
+        splash = new Image(Point(0,0),"splash.jpg");                            //create the image and button
+        insbutton = new Button(Point(250,120), 105, 50, "Instructions", callback_showins);
+        attach(*splash);                                                        //attach them
+        redraw();
+        attach(*insbutton);
 }
 
 void FlipFlap::show_levels(){							//setup game
